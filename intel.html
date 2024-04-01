@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="./pay.png" type="image/x-icon">
+</head>
+<body class="back">
+    <div class="container">
+        <div class="center-text">
+            <h1>Expense Tracker</h1>
+        </div>
+        <div id="new" class="center-text">
+            <h2>Add New</h2>
+            <div class="input-group">
+                <div class="inputitem">
+                    <p>Expense</p> 
+                    <select id='itemType'>
+                        <option value="Credited">Credited</option>
+                        <option value="Debited">Debited</option>
+                    </select>
+                </div>
+                <div class="inputitem">
+                    <p>Enter Description:</p> 
+                    <input id="name" type="text" placeholder="Description">
+                </div>
+                <div class="inputitem">
+                    <p>Amount:</p> 
+                    <input id="amount" type="number" placeholder="Amount">
+                </div>
+            </div>
+            <div class="button-center">
+                <button onclick="addItem()">Add Item</button>
+            </div>
+        </div>
+        <div id="items" class="center-text">
+            <h2>Transactions</h2>
+            <table id="table">
+                <tr class="titles">
+                    <!-- <th>S.no.</th> -->
+                    <th>Name</th>
+                    <th>Amount</th>
+                    <th>Type</th>
+                    <th>Delete</th>
+                </tr>
+            </table>
+        </div>
+        <div class="summary center-text">
+            <h1>Balance: <span id="updatedBal">0</span></h1>
+            <div class="total">
+                <div>Total Credited: <h2 id="updatedInc">0</h2></div>
+                <div>Total Debited: <h2 id="updatedExp">0</h2></div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
+
