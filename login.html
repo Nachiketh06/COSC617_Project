@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stylish Login Page</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 15px 25px rgba(0,0,0,0.2);
+            width: 350px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        .form-input {
+            position: relative;
+            margin-bottom: 25px;
+        }
+        .form-input input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-bottom: 2px solid #adadad;
+            outline: none;
+            background: transparent;
+        }
+        .form-input label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            transition: all 0.5s;
+        }
+        .form-input input:focus ~ label,
+        .form-input input:valid ~ label {
+            top: -20px;
+            color: #2575fc;
+            font-size: 12px;
+        }
+        .login-button {
+            width: 100%;
+            padding: 10px;
+            background-color: #2575fc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .login-button:hover {
+            background-color: #1a5cc8;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form action="http://localhost:3000/submit-login" method="post">
+            <div class="form-input">
+                <input type="text" id="username" name="username" required>
+                <label for="username">Username</label>
+            </div>
+            <div class="form-input">
+                <input type="password" id="password" name="password" required>
+                <label for="password">Password</label>
+            </div>
+            <button id = "submit-button" type="submit" class="login-button">Log In</button>
+        </form>
+    </div>
+  
+</body>
+<!-- <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const button = document.getElementById('submit-button');
+        button.addEventListener('click', async function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            const form = document.querySelector('form');
+            const formData = new FormData(form);
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json(); // Parse the JSON response from the server
+
+            if (result.success) {
+                window.location.href = result.redirectUrl; // Redirect if login is successful
+            } else {
+                alert('Login failed: ' + result.message); // Display an error message
+            }
+        });
+    });
+</script> -->
+
+</html>
