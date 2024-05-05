@@ -1,15 +1,11 @@
-const path = require('path');
 const express = require('express');
 const dotenv = require('dotenv');
-const colors = require('colors');
-const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const connectDB = require('./config/db');
 const cors = require('cors');
 dotenv.config({ path: './config/config.env' });
 const Transaction = require('./models/Transaction');
 const User = require('./models/User');
-const bcrypt = require('bcryptjs');
 
 connectDB();
 
@@ -47,13 +43,6 @@ app.delete('/api/v1/transactions/:id', async (req, res) => {
   try {
     const transaction = await Transaction.findById(req.params.id);
     console.log(transaction);
-    // if(!transaction) {
-    //   return res.status(404).json({
-    //     success: false,
-    //     error: 'No transaction found'
-    //   });
-    // }
-
     await transaction.remove();
 
     return res.status(200).json({
@@ -72,7 +61,6 @@ app.delete('/api/v1/transactions/:id', async (req, res) => {
 app.post('/api/v1/transactions', async (req, res) => {
 
   try {
-    // const { text, amount,userId } = req.body;
     console.log(req.body);
     const transaction = await Transaction.create(req.body);
 
@@ -102,17 +90,9 @@ app.post('/login', async (req, res) => {
   const { name, pass } = req.body;
   let password = pass;
   try {
-    // Check for user by email
     const user = await User.findOne({ name: name });
     console.log(user);
-    // if (!user) {
-    //   return res.status(400).json({
-    //     success: false,
-    //     message: 'Invalid credentials'
-    //   });
-    // }
 
-    // Compare password with hashed password in database
     const isMatch = password === user.pass;
     console.log()
     if (!isMatch) {
@@ -122,7 +102,6 @@ app.post('/login', async (req, res) => {
       });
     }
 
-    // Send back user info, without the password
     const { pass, ...userInfo } = user.toObject();
     res.status(200).json({
       success: true,
@@ -141,7 +120,6 @@ app.post('/login', async (req, res) => {
 app.post('/signup', async (req, res) => {
   const { name, password, cpassword } = req.body;
 
-  // Validate password and confirm password
   if (password !== cpassword) {
     return res.status(400).json({
       success: false,
@@ -149,7 +127,6 @@ app.post('/signup', async (req, res) => {
     });
   }
   try {
-    // Check if user already exists
     const userExists = await User.findOne({ name: name });
     if (userExists) {
       return res.status(400).json({
@@ -158,16 +135,11 @@ app.post('/signup', async (req, res) => {
       });
     }
 
-    
-
-    // Create a new user
     const newUser = new User({
       name: name,
       pass: password
     });
     await newUser.save();
-
-    // Send back the user info, without the password
     const { pass, ...userInfo } = newUser.toObject();
     res.status(201).json({
       success: true,
