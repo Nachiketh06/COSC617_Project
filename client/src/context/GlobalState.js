@@ -20,7 +20,8 @@ export const GlobalProvider = ({ children }) => {
 
       dispatch({
         type: 'GET_TRANSACTIONS',
-        payload: res.data.data
+        payload: res.data.data,
+        headers:{'ngrok-skip-browser-warning': 'any_value'}
       });
     } catch (err) {
       dispatch({
@@ -36,7 +37,8 @@ export const GlobalProvider = ({ children }) => {
     fetch(`https://d391-204-62-51-191.ngrok-free.app/api/v1/transactions/${id}`, {
       method: 'DELETE',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': 'any_value'
       },
     }).then(response => response.json())
       .then(data => console.log(data))
@@ -48,7 +50,8 @@ export const GlobalProvider = ({ children }) => {
     fetch('https://d391-204-62-51-191.ngrok-free.app/api/v1/transactions', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': 'any_value'
       },
       body: JSON.stringify(transaction)
     }).then(response => response.json())
