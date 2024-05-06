@@ -16,7 +16,7 @@ export const GlobalProvider = ({ children }) => {
   async function getTransactions(userId) {
 
     try {
-      const res = await axios.get(`http://localhost:5001/api/v1/transactions/${userId}`);
+      const res = await axios.get(`https://d391-204-62-51-191.ngrok-free.app/api/v1/transactions/${userId}`);
 
       dispatch({
         type: 'GET_TRANSACTIONS',
@@ -33,7 +33,7 @@ export const GlobalProvider = ({ children }) => {
 
   async function deleteTransaction(id) {
 
-    fetch(`http://localhost:5001/api/v1/transactions/${id}`, {
+    fetch(`https://d391-204-62-51-191.ngrok-free.app/api/v1/transactions/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
@@ -45,7 +45,7 @@ export const GlobalProvider = ({ children }) => {
 
   async function addTransaction(transaction) {
   
-    fetch('http://localhost:5001/api/v1/transactions', {
+    fetch('https://d391-204-62-51-191.ngrok-free.app/api/v1/transactions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
