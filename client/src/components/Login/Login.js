@@ -36,7 +36,7 @@ const Login = ({ setUserState }) => {
   const loginHandler = (e) => {
     e.preventDefault();
 
-    axios.post("https://6160-204-62-51-191.ngrok-free.app/login", user).then((res) => {
+    axios.post("https://d391-204-62-51-191.ngrok-free.app/login", user).then((res) => {
         alert(res.data.message);
         setUserState(res.data.user);
         navigate("/", { replace: true });
