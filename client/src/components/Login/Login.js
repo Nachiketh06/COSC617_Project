@@ -36,11 +36,27 @@ const Login = ({ setUserState }) => {
   const loginHandler = (e) => {
     e.preventDefault();
 
-    axios.post("https://d391-204-62-51-191.ngrok-free.app/login", user).then((res) => {
-        alert(res.data.message);
-        setUserState(res.data.user);
-        navigate("/", { replace: true });
-      });
+      fetch("https://d391-204-62-51-191.ngrok-free.app/login", {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'ngrok-skip-browser-warning': 'any_value'
+    },
+    body: JSON.stringify(user)
+  }).then(response => {
+    if (!response.ok) {
+      throw new Error(`HTTP status ${response.status}`);
+    }
+    return response.json();
+  })
+  .then(data => {
+    alert(data.message);
+    setUserState(data.user);
+    navigate("/", { replace: true });
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
     // setFormErrors(validateForm(user));
     // setIsSubmit(true);
     // if (!formErrors) {
